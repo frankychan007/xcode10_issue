@@ -1,0 +1,49 @@
+react native 0.55.4
+
+
+// Multiple commands produce
+ReactNativeNavigation.xcodeproj -> build phases -> Copy Files
+select copy only when installing
+
+
+
+// WebSocket/libfishhook.a
+Relink RCTWebSocket.xcodeproj -> Build Phases -> libfishhook.a
+
+
+
+
+// config.h not found, glog bug
+rm -rf ~/.rncache
+rm -rf node_modules/ && npm install
+cd node_modules/react-native/scripts
+./ios-install-third-party.sh
+cd ../third-party/glog-0.3.x
+./configure
+
+or
+cd node_modules/react-native/scripts && ./ios-install-third-party.sh && cd ../../../
+cd node_modules/react-native/third-party/glog-0.3.4/ && ../../scripts/ios-configure-glog.sh
+
+
+$(SRCROOT)/../node_modules/react-native-navigation/lib/ios
+#import "ReactNativeNavigation.h"
+
+
+// This function declaration is not a prototype RCTFont.h
+../node_modules/react-native/React/Views/RCTFont.h
+- RCT_EXTERN BOOL RCTHasFontHandlerSet();
++ RCT_EXTERN BOOL RCTHasFontHandlerSet(void);
+
+
+
+
+// No member named '__rip' in '__darwin_arm_thread_state64'
+../node_modules/react-native/third-party/glog-0.3.4/src/config.h:
+
+- #define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
++ #if defined(__arm__) || defined(__arm64__)
++ #define PC_FROM_UCONTEXT uc_mcontext->__ss.__pc
++ #else
++ #define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
++ #endif
