@@ -62,3 +62,8 @@ https://github.com/realm/realm-js/issues/2305
 #elif defined(__i386__)
 #define PC_FROM_UCONTEXT uc_mcontext->__ss.__eip
 #endif
+
+// C compiler
+rm -r ~/.rncache/
+cd node_modules/react-native/third-party/glog-0.3.4/
+./configure --host arm-apple-darwin
