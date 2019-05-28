@@ -1,0 +1,9 @@
+Android studio@3.0.1 X React Native@0.55.4
+
+
+
+buildscript {
+    repositories {
++        google()
+        jcenter()
+    }

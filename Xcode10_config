@@ -47,3 +47,18 @@ $(SRCROOT)/../node_modules/react-native-navigation/lib/ios
 + #else
 + #define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
 + #endif
+
+Xcode 10.2
+https://github.com/realm/realm-js/issues/2305
+
+
+// No member named '__rip' in '__darwin_i386_thread_state'; did you mean '__eip'?
+// node_modules/react-native/third-party/glog-0.3.4/src/config.h
+// At the bottom
+#undef HAVE_UCONTEXT_H
+#undef PC_FROM_UCONTEXT
+#if defined(__x86_64__)
+#define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
+#elif defined(__i386__)
+#define PC_FROM_UCONTEXT uc_mcontext->__ss.__eip
+#endif
