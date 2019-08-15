@@ -67,3 +67,7 @@ https://github.com/realm/realm-js/issues/2305
 rm -r ~/.rncache/
 cd node_modules/react-native/third-party/glog-0.3.4/
 ./configure --host arm-apple-darwin
+
+// Linker command failed
+// Edit schema to Debug rather than Release. Currently there are issues with running the Release schema on the simulator.
+
